@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Retiros USD</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300;400;700&display=swap');
+        @font-face {
+            font-family: 'Heavitas';
+            src: url('https://fonts.cdnfonts.com/s/21068/Heavitas.woff') format('woff');
+        }
+        body { 
+            font-family: 'Roboto Flex', sans-serif; 
+            text-align: center; 
+            margin: 20px; 
+            background-color: #070612; 
+            color: white;
+        }
+        .container { 
+            max-width: 400px; 
+            margin: auto; 
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h2 {
+            font-family: 'Heavitas', sans-serif;
+            font-size: 28px;
+        }
+        input, button { 
+            margin: 5px; 
+            padding: 10px; 
+            width: 100%; 
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #FE0000;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 3px 3px 10px rgba(255, 0, 0, 0.5);
+        }
+        button:hover {
+            background-color: #D00000;
+        }
+        .logo {
+            max-width: 150px;
+            display: block;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Calculadora de Retiros USD</h2>
+        <label>Monto en USD:</label>
+        <input type="number" id="monto" placeholder="Ingrese el monto">
+        
+        <h3>Resultados</h3>
+        <img src="/mnt/data/unnamed2.png" alt="Logo Prex" class="logo">
+        <p>Total a través de PREX: <span id="totalPrex">-</span> USD</p>
+        
+        <img src="/mnt/data/DolarApp_Logo_RGB_21.png" alt="Logo Dólar App" class="logo">
+        <p>Total a través de Dólar App: <span id="totalDolarApp">-</span> USD</p>
+        
+        <h3>Conversión a Pesos</h3>
+        <label>Valor del dólar en PREX:</label>
+        <input type="number" id="cotizacionPrex" placeholder="Ingrese cotización">
+        <p>Equivalente en Pesos: <span id="pesosPrex">-</span></p>
+        
+        <label>Valor del dólar en Dólar App:</label>
+        <input type="number" id="cotizacionDolarApp" placeholder="Ingrese cotización">
+        <p>Equivalente en Pesos: <span id="pesosDolarApp">-</span></p>
+        
+        <button onclick="calcular()">Calcular</button>
+    </div>
+
+    <script>
+        function calcular() {
+            let monto = parseFloat(document.getElementById("monto").value);
+            if (isNaN(monto) || monto <= 0) {
+                alert("Ingrese un monto válido");
+                return;
+            }
+            
+            let totalPrex = monto - 4.88;
+            let totalDolarApp = monto - 3 - (monto * 0.035);
+            
+            document.getElementById("totalPrex").innerText = totalPrex.toFixed(2);
+            document.getElementById("totalDolarApp").innerText = totalDolarApp.toFixed(2);
+            
+            let cotizacionPrex = parseFloat(document.getElementById("cotizacionPrex").value);
+            let cotizacionDolarApp = parseFloat(document.getElementById("cotizacionDolarApp").value);
+            
+            if (!isNaN(cotizacionPrex) && cotizacionPrex > 0) {
+                document.getElementById("pesosPrex").innerText = (totalPrex * cotizacionPrex).toFixed(2);
+            }
+            
+            if (!isNaN(cotizacionDolarApp) && cotizacionDolarApp > 0) {
+                document.getElementById("pesosDolarApp").innerText = (totalDolarApp * cotizacionDolarApp).toFixed(2);
+            }
+        }
+    </script>
+</body>
+</html>
