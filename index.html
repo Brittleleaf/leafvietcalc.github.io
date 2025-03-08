@@ -110,10 +110,11 @@
         }
 
         /* Ajustar imágenes, excepto la de leafviet.png */
-        .logo:not([src="Images/leafviet.png"]) {
-            max-width: 100%; /* Ajusta el ancho máximo de la imagen al contenedor */
-            height: auto;    /* Mantiene la relación de aspecto */
-            object-fit: contain; /* Asegura que la imagen se ajuste sin deformarse */
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ajuste para que las imágenes se adapten sin deformarse */
+            max-width: 100%;
         }
 
         /* Fuentes */
