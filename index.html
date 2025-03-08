@@ -111,6 +111,15 @@
             background-color: #fff;
             margin: 10px 0; /* Menor margen para acercar las barras al botón */
         }
+
+        /* Estilo para las imágenes */
+        img.logo {
+            max-width: 100%;   /* La imagen no será más ancha que el contenedor */
+            max-height: 100%;  /* La imagen no será más alta que el contenedor */
+            object-fit: contain; /* La imagen mantiene su relación de aspecto sin deformarse */
+            margin: 0 auto;    /* Centra la imagen horizontalmente */
+            display: block;    /* Asegura que la imagen se trate como un bloque para centrarla */
+        }
     </style>
 </head>
 <body>
@@ -214,15 +223,12 @@
 
             let cotizacionDolarApp = await obtenerCotizacionDolarApp();
             if (!isNaN(cotizacionDolarApp)) {
-                let totalDolarApp = monto - 3 - (monto * 0.035);
+                let totalDolarApp = monto - 0.6; // Comisión de 0.6 USD para Dólar App
                 document.getElementById("totalDolarApp").innerText = formatCurrency(totalDolarApp);
-
                 let pesosDolarApp = totalDolarApp * cotizacionDolarApp;
                 document.getElementById("pesosDolarApp").innerText = formatCurrency(pesosDolarApp);
             }
         }
-
-        obtenerCotizacionDolarApp();
     </script>
 </body>
 </html>
