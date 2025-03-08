@@ -6,15 +6,14 @@
     <title>Calculadora de Retiros USD</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300;400;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap'); /* Fuente Nunito */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap'); /* Fuente Montserrat */
-
+        @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
         @font-face {
             font-family: 'Heavitas';
             src: url('https://fonts.cdnfonts.com/s/21068/Heavitas.woff') format('woff');
         }
         body { 
-            font-family: 'Montserrat', sans-serif; /* Cambié a Montserrat para el cuerpo de la página */
+            font-family: 'Roboto Flex', sans-serif; 
             text-align: center; 
             margin: 20px; 
             background: url('Images/background.jpg') no-repeat center center fixed;
@@ -27,13 +26,12 @@
             margin: auto; 
             padding: 20px;
             border-radius: 15px;
-            background-color: rgba(29, 31, 40, 0.5); /* Fondo más transparente y difuso */
-            backdrop-filter: blur(8px); /* Efecto difuso de fondo */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Borde tenue */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); /* Sombra más suave */
+            background-color: rgba(29, 31, 40, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
         .prex-container-arg {
-            background-color: rgba(112, 38, 221, 0.3);
+            background-color: rgba(112, 38, 221, 0.4);
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 20px;
@@ -41,7 +39,7 @@
             box-shadow: 0 4px 10px rgba(112, 38, 221, 0.5);
         }
         .prex-container-uy {
-            background-color: rgba(25, 11, 48, 0.7);
+            background-color: rgba(25, 11, 48, 0.8);
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 20px;
@@ -49,7 +47,7 @@
             box-shadow: 0 4px 10px rgba(105, 33, 183, 0.5);
         }
         .dolarapp-container {
-            background-color: rgba(34, 208, 129, 0.2);
+            background-color: rgba(34, 208, 129, 0.3);
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 20px;
@@ -81,7 +79,6 @@
         button {
             background: linear-gradient(to right, #bc2ce6, #6f12dc);
             color: white;
-            font-family: 'Nunito', sans-serif; /* Fuente Nunito para el botón */
             font-size: 18px;
             cursor: pointer;
             box-shadow: 3px 3px 10px rgba(188, 44, 230, 0.5);
@@ -111,6 +108,22 @@
             background-color: #fff;
             margin: 10px 0; /* Menor margen para acercar las barras al botón */
         }
+
+        /* Ajustar imágenes, excepto la de leafviet.png */
+        .logo:not([src="Images/leafviet.png"]) {
+            max-width: 100%; /* Ajusta el ancho máximo de la imagen al contenedor */
+            height: auto;    /* Mantiene la relación de aspecto */
+            object-fit: contain; /* Asegura que la imagen se ajuste sin deformarse */
+        }
+
+        /* Fuentes */
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        button {
+            font-family: 'Nunito', sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -126,7 +139,7 @@
 
         <div class="prex-container-arg">
             <a href="https://play.google.com/store/apps/details?id=air.PrexArgentina" target="_blank">
-                <img src="Images/PREXARG.png" alt="Logo Prex ARG" class="logo">
+                <img src="Images/PREXARG.png" alt="Logo Prex" class="logo">
             </a>
             <p>Monto neto a recibir: <span id="totalPrexARG">-</span> USD</p>
             <label for="cotizacionPrexARG">Valor del dólar en PREX ARG:</label>
@@ -136,7 +149,7 @@
 
         <div class="prex-container-uy">
             <a href="https://play.google.com/store/apps/details?id=air.Prex" target="_blank">
-                <img src="Images/PREXUY.png" alt="Logo Prex UY" class="logo">
+                <img src="Images/PREXUY.png" alt="Logo Prex" class="logo">
             </a>
             <p>Monto neto a recibir: <span id="totalPrexUY">-</span> USD</p>
             <label for="cotizacionPrexUY">Valor del dólar en PREX UY:</label>
@@ -150,7 +163,7 @@
             </a>
             <p>Monto neto a recibir: <span id="totalDolarApp">-</span> USD</p>
             <p>Valor del dólar en Dólar App: <span id="valorDolarApp">-</span></p>
-            <p>Equivalente en Pesos: <span id="pesosDolarApp">-</span> ARS</p>
+            <p>Equivalente en Pesos (Dólar App): <span id="pesosDolarApp">-</span> ARS</p>
         </div>
         
         <hr> <!-- Barra separadora encima del botón -->
