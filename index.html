@@ -112,20 +112,16 @@
             margin: 10px 0; /* Menor margen para acercar las barras al botón */
         }
 
-        /* Estilo para las imágenes */
-        img.logo {
-            max-width: 100%;   /* La imagen no será más ancha que el contenedor */
-            max-height: 100%;  /* La imagen no será más alta que el contenedor */
-            object-fit: contain; /* La imagen mantiene su relación de aspecto sin deformarse */
-            margin: 0 auto;    /* Centra la imagen horizontalmente */
-            display: block;    /* Asegura que la imagen se trate como un bloque para centrarla */
+        /* Ajuste de las imágenes al 70% */
+        .logo {
+            width: 70%;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <a href="https://www.instagram.com/brittleleaf/">
-            <img src="Images/leafviet.png" alt="Logo" class="logo" style="max-width: 250px;">
+            <img src="Images/leafviet.png" alt="Logo" class="logo">
         </a>
         <h2>Calculadora de Retiros USD</h2>
         <label for="monto">Monto que deseas extraer (USD):</label>
@@ -189,7 +185,6 @@
 
         function formatCurrency(amount) {
             if (isNaN(amount)) return '-';
-            // Asegurar el formato "$0.000,00"
             return '$ ' + amount.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
@@ -212,7 +207,7 @@
                 document.getElementById("pesosPrexARG").innerText = formatCurrency(pesosPrexARG);
             }
 
-            let totalPrexUY = monto - 4.88; // Comisión de 4.88 USD para Prex UY
+            let totalPrexUY = monto - 4.88;
             document.getElementById("totalPrexUY").innerText = formatCurrency(totalPrexUY);
 
             let cotizacionPrexUY = parseFloat(document.getElementById("cotizacionPrexUY").value);
@@ -223,12 +218,15 @@
 
             let cotizacionDolarApp = await obtenerCotizacionDolarApp();
             if (!isNaN(cotizacionDolarApp)) {
-                let totalDolarApp = monto - 0.6; // Comisión de 0.6 USD para Dólar App
+                let totalDolarApp = monto - 3 - (monto * 0.035);
                 document.getElementById("totalDolarApp").innerText = formatCurrency(totalDolarApp);
+
                 let pesosDolarApp = totalDolarApp * cotizacionDolarApp;
                 document.getElementById("pesosDolarApp").innerText = formatCurrency(pesosDolarApp);
             }
         }
+
+        obtenerCotizacionDolarApp();  // Asegura que la cotización se cargue al iniciar
     </script>
 </body>
 </html>
