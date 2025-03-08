@@ -1,234 +1,621 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Retiros USD</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300;400;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap'); /* Fuente Nunito */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap'); /* Fuente Montserrat */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Retiros USD</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300;400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
 
-        @font-face {
-            font-family: 'Heavitas';
-            src: url('https://fonts.cdnfonts.com/s/21068/Heavitas.woff') format('woff');
-        }
-        body { 
-            font-family: 'Montserrat', sans-serif; /* Cambié a Montserrat para el cuerpo de la página */
-            text-align: center; 
-            margin: 20px; 
-            background: url('Images/background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            background-color: #070612; 
-            color: white;
-        }
-        .container { 
-            max-width: 380px; 
-            margin: auto; 
-            padding: 20px;
-            border-radius: 15px;
-            background-color: rgba(29, 31, 40, 0.5); /* Fondo más transparente y difuso */
-            backdrop-filter: blur(8px); /* Efecto difuso de fondo */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Borde tenue */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); /* Sombra más suave */
-        }
-        .prex-container-arg {
-            background-color: rgba(112, 38, 221, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #A7D8FF;
-            box-shadow: 0 4px 10px rgba(112, 38, 221, 0.5);
-        }
-        .prex-container-uy {
-            background-color: rgba(25, 11, 48, 0.7);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #6921b7;
-            box-shadow: 0 4px 10px rgba(105, 33, 183, 0.5);
-        }
-        .dolarapp-container {
-            background-color: rgba(34, 208, 129, 0.2);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 2px solid #ffffff;
-            box-shadow: 0 4px 10px rgba(34, 208, 129, 0.5);
-        }
-        input, button { 
-            margin: 10px 0; 
-            padding: 12px; 
-            width: 100%; 
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-            background-color: white; /* Fondo blanco */
-            color: black;
-            border: 2px solid transparent; /* Borde transparente por defecto */
-        }
-        input:focus, button:focus { 
-            outline: none; 
-            box-shadow: 0 0 10px rgba(188, 44, 230, 0.7);
-            border: 2px solid transparent; /* Asegurar que el borde siga siendo transparente */
-        }
-        input:focus {
-            border: 2px solid transparent;
-            box-shadow: 0 0 10px rgba(188, 44, 230, 0.7); /* Borde con efecto */
-        }
-        button {
-            background: linear-gradient(to right, #bc2ce6, #6f12dc);
-            color: white;
-            font-family: 'Nunito', sans-serif; /* Fuente Nunito para el botón */
-            font-size: 18px;
-            cursor: pointer;
-            box-shadow: 3px 3px 10px rgba(188, 44, 230, 0.5);
-            transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s;
-        }
-        button:hover {
-            background: linear-gradient(to right, #6f12dc, #bc2ce6);
-            transform: scale(1.1);
-            box-shadow: 5px 5px 15px rgba(188, 44, 230, 0.7);
-        }
-
-        /* Estilo para el mensaje al final de la página */
-        .desarrollado {
-            margin-top: 10px;
-            color: white;
-            font-size: 16px;
-        }
-        .desarrollado p {
-            text-align: center;
-            font-weight: normal;
-        }
-
-        /* Estilo para las barras separadoras */
-        hr {
-            border: 0;
-            height: 1px;
-            background-color: #fff;
-            margin: 10px 0; /* Menor margen para acercar las barras al botón */
-        }
-
-        /* Ajustar solo las imágenes dentro de los contenedores */
-        img.logo-container {
-            width: 70%;
-            height: auto;
-            object-fit: contain;
-        }
-    </style>
+    @font-face {
+      font-family: 'Heavitas';
+      src: url('https://fonts.cdnfonts.com/s/21068/Heavitas.woff') format('woff');
+    }
+    body { 
+      font-family: 'Montserrat', sans-serif;
+      text-align: center; 
+      margin: 20px; 
+      background: url('Images/background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      background-color: #070612; 
+      color: white;
+    }
+    .container { 
+      max-width: 380px; 
+      margin: auto; 
+      padding: 20px;
+      border-radius: 15px;
+      background-color: rgba(29, 31, 40, 0.5);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    }
+    .prex-container-arg {
+      background-color: rgba(112, 38, 221, 0.3);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 2px solid #A7D8FF;
+      box-shadow: 0 4px 10px rgba(112, 38, 221, 0.5);
+    }
+    .prex-container-uy {
+      background-color: rgba(25, 11, 48, 0.7);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 2px solid #6921b7;
+      box-shadow: 0 4px 10px rgba(105, 33, 183, 0.5);
+    }
+    .dolarapp-container {
+      background-color: rgba(34, 208, 129, 0.2);
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border: 2px solid #ffffff;
+      box-shadow: 0 4px 10px rgba(34, 208, 129, 0.5);
+    }
+    input, button { 
+      margin: 10px 0; 
+      padding: 12px; 
+      width: 100%; 
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+      background-color: white;
+      color: black;
+      border: 2px solid transparent;
+    }
+    input:focus, button:focus { 
+      outline: none; 
+      box-shadow: 0 0 10px rgba(188, 44, 230, 0.7);
+      border: 2px solid transparent;
+    }
+    input:focus {
+      border: 2px solid transparent;
+      box-shadow: 0 0 10px rgba(188, 44, 230, 0.7);
+    }
+    button {
+      background: linear-gradient(to right, #bc2ce6, #6f12dc);
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 3px 3px 10px rgba(188, 44, 230, 0.5);
+      transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s;
+    }
+    button:hover {
+      background: linear-gradient(to right, #6f12dc, #bc2ce6);
+      transform: scale(1.1);
+      box-shadow: 5px 5px 15px rgba(188, 44, 230, 0.7);
+    }
+    .desarrollado {
+      margin-top: 10px;
+      color: white;
+      font-size: 16px;
+    }
+    .desarrollado p {
+      text-align: center;
+      font-weight: normal;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background-color: #fff;
+      margin: 10px 0;
+    }
+    img.logo-container {
+      width: 70%;
+      height: auto;
+      object-fit: contain;
+    }
+    /* Estilos para el botón de Paypal Comisiones */
+    .paypal-comisiones button {
+      background: linear-gradient(to right, #bc2ce6, #6f12dc);
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 3px 3px 10px rgba(188, 44, 230, 0.5);
+      transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s;
+    }
+    .paypal-comisiones button:hover {
+      background: linear-gradient(to right, #6f12dc, #bc2ce6);
+      transform: scale(1.1);
+      box-shadow: 5px 5px 15px rgba(188, 44, 230, 0.7);
+    }
+    .paypal-comisiones p {
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    /* Animaciones de desvanecimiento y difuminado */
+    @keyframes fadeOut {
+      from { opacity: 1; filter: blur(0); }
+      to { opacity: 0; filter: blur(5px); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; filter: blur(5px); }
+      to { opacity: 1; filter: blur(0); }
+    }
+    .fade-out {
+      animation: fadeOut 0.5s forwards;
+    }
+    .fade-in {
+      animation: fadeIn 0.5s forwards;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <a href="https://www.instagram.com/brittleleaf/">
-            <img src="Images/leafviet.png" alt="Logo" class="logo" style="max-width: 250px;">
+  <div class="container">
+    <!-- CONTENIDO PRINCIPAL: Se muestra mientras no se haga clic en Paypal Comisiones -->
+    <div id="mainContent">
+      <a href="https://www.instagram.com/brittleleaf/">
+        <img src="Images/leafviet.png" alt="Logo" class="logo" style="max-width: 250px;">
+      </a>
+
+      <!-- Botón para mostrar la sección de Paypal Comisiones -->
+      <div class="paypal-comisiones">
+        <button type="button" id="paypalBtn" onclick="showPaypalCalcSection()">Paypal Comisiones</button>
+        <p>Que las comisiones de paypal no te sorprendan a la hora de pagar o solicitar un pago, calcula el importe neto que recibirás o se cobrara en tu cuenta Paypal!</p>
+      </div>
+      <hr>
+
+      <h2>Calculadora de Retiros USD</h2>
+      <label for="monto">Monto que deseas extraer (USD):</label>
+      <input type="number" id="monto" placeholder="Ingrese el monto (min 5 USD)" onchange="calcular()">
+      <p class="alerta" id="mensajeEmergencia" style="display: none;">El monto mínimo es 5 USD</p>
+      <h3>Resultados</h3>
+
+      <div class="prex-container-arg">
+        <a href="https://play.google.com/store/apps/details?id=air.PrexArgentina" target="_blank">
+          <img src="Images/PREXARG.png" alt="Logo Prex ARG" class="logo-container">
         </a>
-        <h2>Calculadora de Retiros USD</h2>
-        <label for="monto">Monto que deseas extraer (USD):</label>
-        <input type="number" id="monto" placeholder="Ingrese el monto (min 5 USD)" onchange="calcular()">
-        <p class="alerta" id="mensajeEmergencia" style="display: none;">El monto mínimo es 5 USD</p>
-        <h3>Resultados</h3>
+        <p>Monto neto a recibir: <span id="totalPrexARG">-</span> USD</p>
+        <label for="cotizacionPrexARG">Valor del dólar en PREX ARG:</label>
+        <input type="number" id="cotizacionPrexARG" placeholder="Ingrese cotización">
+        <p>Equivalente en Pesos: <span id="pesosPrexARG">-</span> ARS</p>
+      </div>
 
-        <div class="prex-container-arg">
-            <a href="https://play.google.com/store/apps/details?id=air.PrexArgentina" target="_blank">
-                <img src="Images/PREXARG.png" alt="Logo Prex ARG" class="logo-container">
-            </a>
-            <p>Monto neto a recibir: <span id="totalPrexARG">-</span> USD</p>
-            <label for="cotizacionPrexARG">Valor del dólar en PREX ARG:</label>
-            <input type="number" id="cotizacionPrexARG" placeholder="Ingrese cotización">
-            <p>Equivalente en Pesos: <span id="pesosPrexARG">-</span> ARS</p>
-        </div>
+      <div class="prex-container-uy">
+        <a href="https://play.google.com/store/apps/details?id=air.Prex" target="_blank">
+          <img src="Images/PREXUY.png" alt="Logo Prex UY" class="logo-container">
+        </a>
+        <p>Monto neto a recibir: <span id="totalPrexUY">-</span> USD</p>
+        <label for="cotizacionPrexUY">Valor del dólar en PREX UY:</label>
+        <input type="number" id="cotizacionPrexUY" placeholder="Ingrese cotización">
+        <p>Equivalente en Pesos: <span id="pesosPrexUY">-</span> ARS</p>
+      </div>
 
-        <div class="prex-container-uy">
-            <a href="https://play.google.com/store/apps/details?id=air.Prex" target="_blank">
-                <img src="Images/PREXUY.png" alt="Logo Prex UY" class="logo-container">
-            </a>
-            <p>Monto neto a recibir: <span id="totalPrexUY">-</span> USD</p>
-            <label for="cotizacionPrexUY">Valor del dólar en PREX UY:</label>
-            <input type="number" id="cotizacionPrexUY" placeholder="Ingrese cotización">
-            <p>Equivalente en Pesos: <span id="pesosPrexUY">-</span> ARS</p>
-        </div>
-
-        <div class="dolarapp-container">
-            <a href="https://www.dolarapp.com/referrals/blk?referralCode=nicoluciel_C9x" target="_blank">
-                <img src="Images/dolarapp.png" alt="Logo Dólar App" class="logo-container">
-            </a>
-            <p>Monto neto a recibir: <span id="totalDolarApp">-</span> USD</p>
-            <p>Valor del dólar en Dólar App: <span id="valorDolarApp">-</span></p>
-            <p>Equivalente en Pesos: <span id="pesosDolarApp">-</span> ARS</p>
-        </div>
-        
-        <hr> <!-- Barra separadora encima del botón -->
-
-        <button onclick="calcular()">Calcular</button>
-
-        <!-- Barra separadora antes del mensaje -->
-        <hr>
-
-        <!-- Mensaje al final de la página -->
-        <div class="desarrollado">
-            <p>Desarrollado por <strong>Brittleleaf</strong></p>
-        </div>
+      <div class="dolarapp-container">
+        <a href="https://www.dolarapp.com/referrals/blk?referralCode=nicoluciel_C9x" target="_blank">
+          <img src="Images/dolarapp.png" alt="Logo Dólar App" class="logo-container">
+        </a>
+        <p>Monto neto a recibir: <span id="totalDolarApp">-</span> USD</p>
+        <p>Valor del dólar en Dólar App: <span id="valorDolarApp">-</span></p>
+        <p>Equivalente en Pesos: <span id="pesosDolarApp">-</span> ARS</p>
+      </div>
+      
+      <hr>
+      <button onclick="calcular()">Calcular</button>
+      <hr>
     </div>
 
-    <script>
-        async function obtenerCotizacionDolarApp() {
-            try {
-                const response = await fetch("https://criptoya.com/api/dolarapp/USDC/ARS/1");
-                const data = await response.json();
-                document.getElementById("valorDolarApp").innerText = formatCurrency(data.totalBid);
-                return data.totalBid;
-            } catch (error) {
-                console.error("Error al obtener la cotización de Dólar App:", error);
-            }
+    <!-- SECCIÓN PAYPALCALCSECTION: Se muestra al presionar "Paypal Comisiones" -->
+    <div id="paypalcalcsection" style="display:none;">
+      <!-- Se agrega el logo de leafviet encima de la sección de PayPal -->
+      <a href="https://www.instagram.com/brittleleaf/">
+        <img src="Images/leafviet.png" alt="Logo" class="logo" style="max-width: 250px; margin-bottom:20px;">
+      </a>
+      <!-- ##################################### -->
+      <style>
+        /* Aseguramos que el modelo de caja incluya padding y bordes */
+        #paypalcalcsection, #paypalcalcsection * {
+          box-sizing: border-box;
         }
-
-        function formatCurrency(amount) {
-            if (isNaN(amount)) return '-';
-            return '$ ' + amount.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        /* Ajuste general para que la sección se alinee con el contenedor principal */
+        #paypalcalcsection {
+          width: 100%;
+          max-width: 380px;
+          margin: 20px auto;
         }
-
-        async function calcular() {
-            let monto = parseFloat(document.getElementById("monto").value);
-            let mensajeEmergencia = document.getElementById("mensajeEmergencia");
-            if (isNaN(monto) || monto < 5) {
-                mensajeEmergencia.style.display = 'block';
-                return;
+        #paypalcalcsection .switch-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin: 20px auto;
+          padding: 15px;
+          background: linear-gradient(to right, #383c61, #9cbcf5);
+          background-color: rgba(56, 60, 97, 0.7);
+          border-radius: 15px;
+          width: 100%;
+          max-width: 380px;
+          box-shadow: 0 4px 20px rgba(56, 60, 97, 0.7);
+        }
+        #paypalcalcsection .button-container {
+          position: relative;
+          width: 90%;
+          max-width: 180px;
+          height: 50px;
+          margin-bottom: 20px;
+          cursor: pointer;
+          overflow: hidden;
+          border-radius: 25px;
+        }
+        #paypalcalcsection .button-state, 
+        #paypalcalcsection .content-state {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Nunito', sans-serif;
+          font-weight: bold;
+          font-size: 18px;
+          color: white;
+          transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55), z-index 0s ease;
+        }
+        #paypalcalcsection .cobrar, 
+        #paypalcalcsection .content-cobrar {
+          background: linear-gradient(to right, #0565FF, #5BE7FF);
+        }
+        #paypalcalcsection .pagar, 
+        #paypalcalcsection .content-pagar {
+          background: linear-gradient(to right, #090D73, #4C74DB);
+        }
+        #paypalcalcsection .button-icon {
+          font-size: 22px;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: white;
+          color: inherit;
+          border-radius: 50%;
+          transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+          margin-left: 8px;
+        }
+        #paypalcalcsection .button-icon img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          transition: transform 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+        #paypalcalcsection .button-icon img.rotated {
+          transform: rotate(180deg);
+        }
+        #paypalcalcsection .content-container {
+          position: relative;
+          width: 90%;
+          max-width: 350px;
+          height: 250px;
+          cursor: default;
+          left: 0;
+          border-radius: 15px;
+          overflow: hidden;
+        }
+        #paypalcalcsection .active {
+          transform: translateX(0);
+          z-index: 2;
+        }
+        #paypalcalcsection .inactive {
+          transform: translateX(100%);
+          z-index: 1;
+        }
+        #paypalcalcsection .form-container {
+          width: 100%;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+        }
+        #paypalcalcsection .form-group {
+          margin: 10px 0;
+          width: 100%;
+          text-align: center;
+        }
+        #paypalcalcsection label {
+          font-size: 16px;
+          margin-bottom: 5px;
+        }
+        #paypalcalcsection input {
+          width: 100%;
+          max-width: 250px;
+          padding: 10px;
+          font-size: 16px;
+          margin-top: 5px;
+          border-radius: 10px;
+          background-color: #fff;
+          color: #000;
+          border: none;
+          box-shadow: none;
+          text-align: center;
+        }
+        #paypalcalcsection input:focus {
+          outline: none;
+          border: 2px solid #ffffff;
+          box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+        }
+        #paypalcalcsection .result {
+          margin-top: 10px;
+          font-size: 16px;
+          font-weight: bold;
+        }
+        #paypalcalcsection .result-text {
+          font-size: 16px;
+          font-weight: bold;
+          padding: 10px;
+          background-color: transparent;
+          text-align: center;
+          color: #fff;
+        }
+        #paypalcalcsection .button-state {
+          border-radius: 25px;
+        }
+        #paypalcalcsection .content-container {
+          border-radius: 15px;
+        }
+        #paypalcalcsection .content-cobrar, 
+        #paypalcalcsection .content-pagar {
+          border-radius: 15px;
+        }
+        /* Estilo para el botón de retorno */
+        #paypalcalcsection button.return-btn {
+          background: linear-gradient(to right, #bc2ce6, #6f12dc);
+          color: white;
+          font-family: 'Nunito', sans-serif;
+          font-size: 18px;
+          cursor: pointer;
+          margin-top: 20px;
+          box-shadow: 3px 3px 10px rgba(188, 44, 230, 0.5);
+          transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s;
+          width: 80%;
+          max-width: 300px;
+          border-radius: 8px;
+          padding: 10px;
+        }
+        #paypalcalcsection button.return-btn:hover {
+          background: linear-gradient(to right, #6f12dc, #bc2ce6);
+          transform: scale(1.05);
+          box-shadow: 5px 5px 15px rgba(188, 44, 230, 0.7);
+        }
+      </style>
+      <div class="switch-container">
+        <!-- Botón de cambio: inicialmente se muestra "Cobrar" -->
+        <div id="buttonContainer" class="button-container">
+          <div class="button-state cobrar active" id="stateCobrar">
+            <span class="button-text">Cobrar</span>
+            <span class="button-icon" id="iconCobrar">
+              <img src="Images/pay-charge.png" alt="Icono Cobrar" />
+            </span>
+          </div>
+          <div class="button-state pagar inactive" id="statePagar">
+            <span class="button-text">Pagar</span>
+            <span class="button-icon" id="iconPagar">
+              <img src="Images/pay-charge.png" alt="Icono Pagar" />
+            </span>
+          </div>
+        </div>
+        <!-- Contenedor para el contenido de Cobrar / Pagar -->
+        <div id="contentContainer" class="content-container">
+          <!-- Contenido para modo Cobrar (inicialmente activo) -->
+          <div class="content-state content-cobrar active" id="contentCobrar">
+            <div class="form-container">
+              <div class="form-group">
+                <label for="montoRecibir">Monto que deseas recibir (USD):</label>
+                <input type="text" id="montoRecibir" placeholder="$0.00" oninput="paypalCalcularCobro(); paypalFormatCurrency('montoRecibir')" />
+              </div>
+              <div class="form-group">
+                <label for="montoEnviar">Te deben enviar:</label>
+                <div class="result-text" id="montoEnviar">USD $0.00</div>
+              </div>
+              <div class="form-group">
+                <label for="comisionCobrar">La comisión es:</label>
+                <div class="result-text" id="comisionCobrar">USD $0.00</div>
+              </div>
+            </div>
+          </div>
+          <!-- Contenido para modo Pagar (inicialmente inactivo) -->
+          <div class="content-state content-pagar inactive" id="contentPagar">
+            <div class="form-container">
+              <div class="form-group">
+                <label for="montoPagar">Monto que deseas pagar (USD):</label>
+                <input type="text" id="montoPagar" placeholder="$0.00" oninput="paypalCalcularPago(); paypalFormatCurrency('montoPagar')" />
+              </div>
+              <div class="form-group">
+                <label for="comisionPagar">La comisión es:</label>
+                <div class="result-text" id="comisionPagar">USD $0.00</div>
+              </div>
+              <div class="form-group">
+                <label for="montoRecibido">Se reciben en total:</label>
+                <div class="result-text" id="montoRecibido">USD $0.00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Botón para regresar al cálculo de retiro (return a main content) -->
+      <button type="button" class="return-btn" onclick="returnToMainContent()">Quiero calcular un retiro!</button>
+      <!-- Separador de anotación -->
+      <!-- ##################################### -->
+      <script>
+        (function(){
+          const paypalComision = 0.054;
+          const paypalFija = 0.30;
+          const stateCobrar = document.getElementById("stateCobrar");
+          const statePagar = document.getElementById("statePagar");
+          const contentCobrar = document.getElementById("contentCobrar");
+          const contentPagar = document.getElementById("contentPagar");
+          
+          document.getElementById("buttonContainer").addEventListener("click", function(){
+            togglePaypalContent();
+            document.querySelectorAll('#paypalcalcsection .button-icon img').forEach(img=>{
+              img.classList.toggle('rotated');
+            });
+          });
+          
+          function togglePaypalContent(){
+            if(stateCobrar.classList.contains("active")){
+              stateCobrar.classList.remove("active");
+              contentCobrar.classList.remove("active");
+              stateCobrar.classList.add("inactive");
+              contentCobrar.classList.add("inactive");
+              
+              statePagar.classList.remove("inactive");
+              contentPagar.classList.remove("inactive");
+              statePagar.classList.add("active");
+              contentPagar.classList.add("active");
             } else {
-                mensajeEmergencia.style.display = 'none';
+              statePagar.classList.remove("active");
+              contentPagar.classList.remove("active");
+              statePagar.classList.add("inactive");
+              contentPagar.classList.add("inactive");
+              
+              stateCobrar.classList.remove("inactive");
+              contentCobrar.classList.remove("inactive");
+              stateCobrar.classList.add("active");
+              contentCobrar.classList.add("active");
             }
-
-            let totalPrexARG = monto;
-            document.getElementById("totalPrexARG").innerText = formatCurrency(totalPrexARG);
-
-            let cotizacionPrexARG = parseFloat(document.getElementById("cotizacionPrexARG").value); 
-            if (!isNaN(cotizacionPrexARG)) {
-                let pesosPrexARG = totalPrexARG * cotizacionPrexARG;
-                document.getElementById("pesosPrexARG").innerText = formatCurrency(pesosPrexARG);
+          }
+          
+          window.paypalCalcularCobro = function(){
+            let montoRecibir = parseFloat(document.getElementById("montoRecibir").value.replace(/\D/g, "")) / 100;
+            if(!isNaN(montoRecibir) && montoRecibir >= 0){
+              let comision = (montoRecibir * paypalComision) + paypalFija;
+              let montoEnviar = montoRecibir + comision;
+              document.getElementById("comisionCobrar").innerText = `USD $${comision.toFixed(2)}`;
+              document.getElementById("montoEnviar").innerText = `USD $${montoEnviar.toFixed(2)}`;
             }
-
-            let totalPrexUY = monto - 4.88;
-            document.getElementById("totalPrexUY").innerText = formatCurrency(totalPrexUY);
-
-            let cotizacionPrexUY = parseFloat(document.getElementById("cotizacionPrexUY").value);
-            if (!isNaN(cotizacionPrexUY)) {
-                let pesosPrexUY = totalPrexUY * cotizacionPrexUY;
-                document.getElementById("pesosPrexUY").innerText = formatCurrency(pesosPrexUY);
+          }
+          
+          window.paypalCalcularPago = function(){
+            let montoPagar = parseFloat(document.getElementById("montoPagar").value.replace(/\D/g, "")) / 100;
+            if(!isNaN(montoPagar) && montoPagar >= 0){
+              let comision = (montoPagar * paypalComision) + paypalFija;
+              let montoRecibido = montoPagar - comision;
+              document.getElementById("comisionPagar").innerText = `USD $${comision.toFixed(2)}`;
+              document.getElementById("montoRecibido").innerText = `USD $${montoRecibido.toFixed(2)}`;
             }
-
-            let cotizacionDolarApp = await obtenerCotizacionDolarApp();
-            if (!isNaN(cotizacionDolarApp)) {
-                let totalDolarApp = monto - 3 - (monto * 0.035);
-                document.getElementById("totalDolarApp").innerText = formatCurrency(totalDolarApp);
-
-                let pesosDolarApp = totalDolarApp * cotizacionDolarApp;
-                document.getElementById("pesosDolarApp").innerText = formatCurrency(pesosDolarApp);
+          }
+          
+          window.paypalFormatCurrency = function(inputId){
+            let input = document.getElementById(inputId);
+            let value = input.value.replace(/\D/g, "");
+            if(value){
+              let formattedValue = parseFloat(value / 100).toLocaleString("es-AR", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              });
+              input.value = "$" + formattedValue;
             }
-        }
+          }
+        })();
+      </script>
+    </div>
 
-        obtenerCotizacionDolarApp();  // Asegura que la cotización se cargue al iniciar
-    </script>
+    <!-- CONTENIDO INVARIANTE: Se mantiene visible (separador y mensaje final) -->
+    <div id="bottomSection">
+      <hr>
+      <div class="desarrollado">
+        <p>Desarrollado por <strong>Brittleleaf</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function obtenerCotizacionDolarApp() {
+      try {
+        const response = await fetch("https://criptoya.com/api/dolarapp/USDC/ARS/1");
+        const data = await response.json();
+        document.getElementById("valorDolarApp").innerText = formatCurrency(data.totalBid);
+        return data.totalBid;
+      } catch (error) {
+        console.error("Error al obtener la cotización de Dólar App:", error);
+      }
+    }
+
+    function formatCurrency(amount) {
+      if (isNaN(amount)) return '-';
+      return '$ ' + amount.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    async function calcular() {
+      let monto = parseFloat(document.getElementById("monto").value);
+      let mensajeEmergencia = document.getElementById("mensajeEmergencia");
+      if (isNaN(monto) || monto < 5) {
+        mensajeEmergencia.style.display = 'block';
+        return;
+      } else {
+        mensajeEmergencia.style.display = 'none';
+      }
+
+      let totalPrexARG = monto;
+      document.getElementById("totalPrexARG").innerText = formatCurrency(totalPrexARG);
+
+      let cotizacionPrexARG = parseFloat(document.getElementById("cotizacionPrexARG").value); 
+      if (!isNaN(cotizacionPrexARG)) {
+        let pesosPrexARG = totalPrexARG * cotizacionPrexARG;
+        document.getElementById("pesosPrexARG").innerText = formatCurrency(pesosPrexARG);
+      }
+
+      let totalPrexUY = monto - 4.88;
+      document.getElementById("totalPrexUY").innerText = formatCurrency(totalPrexUY);
+
+      let cotizacionPrexUY = parseFloat(document.getElementById("cotizacionPrexUY").value);
+      if (!isNaN(cotizacionPrexUY)) {
+        let pesosPrexUY = totalPrexUY * cotizacionPrexUY;
+        document.getElementById("pesosPrexUY").innerText = formatCurrency(pesosPrexUY);
+      }
+
+      let cotizacionDolarApp = await obtenerCotizacionDolarApp();
+      if (!isNaN(cotizacionDolarApp)) {
+        let totalDolarApp = monto - 3 - (monto * 0.035);
+        document.getElementById("totalDolarApp").innerText = formatCurrency(totalDolarApp);
+
+        let pesosDolarApp = totalDolarApp * cotizacionDolarApp;
+        document.getElementById("pesosDolarApp").innerText = formatCurrency(pesosDolarApp);
+      }
+    }
+
+    function showPaypalCalcSection() {
+      const mainContent = document.getElementById("mainContent");
+      const paypalcalcsection = document.getElementById("paypalcalcsection");
+      mainContent.classList.add("fade-out");
+      setTimeout(function() {
+        mainContent.style.display = "none";
+        mainContent.classList.remove("fade-out");
+        paypalcalcsection.style.display = "block";
+        paypalcalcsection.classList.add("fade-in");
+        setTimeout(function() {
+          paypalcalcsection.classList.remove("fade-in");
+        }, 500);
+      }, 500);
+    }
+
+    function returnToMainContent() {
+      const mainContent = document.getElementById("mainContent");
+      const paypalcalcsection = document.getElementById("paypalcalcsection");
+      paypalcalcsection.classList.add("fade-out");
+      setTimeout(function() {
+        paypalcalcsection.style.display = "none";
+        paypalcalcsection.classList.remove("fade-out");
+        mainContent.style.display = "block";
+        mainContent.classList.add("fade-in");
+        setTimeout(function() {
+          mainContent.classList.remove("fade-in");
+        }, 500);
+      }, 500);
+    }
+
+    obtenerCotizacionDolarApp();
+  </script>
 </body>
 </html>
