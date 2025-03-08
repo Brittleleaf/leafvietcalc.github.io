@@ -6,12 +6,15 @@
     <title>Calculadora de Retiros USD</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap'); /* Fuente Nunito */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap'); /* Fuente Montserrat */
+
         @font-face {
             font-family: 'Heavitas';
             src: url('https://fonts.cdnfonts.com/s/21068/Heavitas.woff') format('woff');
         }
         body { 
-            font-family: 'Roboto Flex', sans-serif; 
+            font-family: 'Montserrat', sans-serif; /* Cambié a Montserrat para el cuerpo de la página */
             text-align: center; 
             margin: 20px; 
             background: url('Images/background.jpg') no-repeat center center fixed;
@@ -24,14 +27,34 @@
             margin: auto; 
             padding: 20px;
             border-radius: 15px;
-            background-color: rgba(29, 31, 40, 0.9); /* Fondo oscuro con algo de transparencia */
-            border: 2px solid rgba(255, 255, 255, 0.2); /* Borde blanco con opacidad */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8); /* Sombra sutil para dar profundidad */
+            background-color: rgba(29, 31, 40, 0.5); /* Fondo más transparente y difuso */
+            backdrop-filter: blur(8px); /* Efecto difuso de fondo */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Borde tenue */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); /* Sombra más suave */
         }
-        h2 {
-            font-family: 'Heavitas', sans-serif;
-            font-size: 28px;
+        .prex-container-arg {
+            background-color: rgba(112, 38, 221, 0.3);
+            border-radius: 10px;
+            padding: 15px;
             margin-bottom: 20px;
+            border: 2px solid #A7D8FF;
+            box-shadow: 0 4px 10px rgba(112, 38, 221, 0.5);
+        }
+        .prex-container-uy {
+            background-color: rgba(25, 11, 48, 0.7);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #6921b7;
+            box-shadow: 0 4px 10px rgba(105, 33, 183, 0.5);
+        }
+        .dolarapp-container {
+            background-color: rgba(34, 208, 129, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(34, 208, 129, 0.5);
         }
         input, button { 
             margin: 10px 0; 
@@ -42,54 +65,51 @@
             font-size: 16px;
             box-sizing: border-box;
             transition: all 0.3s ease;
+            background-color: white; /* Fondo blanco */
+            color: black;
+            border: 2px solid transparent; /* Borde transparente por defecto */
         }
         input:focus, button:focus { 
             outline: none; 
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+            box-shadow: 0 0 10px rgba(188, 44, 230, 0.7);
+            border: 2px solid transparent; /* Asegurar que el borde siga siendo transparente */
+        }
+        input:focus {
+            border: 2px solid transparent;
+            box-shadow: 0 0 10px rgba(188, 44, 230, 0.7); /* Borde con efecto */
         }
         button {
-            background-color: #FE0000;
+            background: linear-gradient(to right, #bc2ce6, #6f12dc);
             color: white;
+            font-family: 'Nunito', sans-serif; /* Fuente Nunito para el botón */
             font-size: 18px;
             cursor: pointer;
-            box-shadow: 3px 3px 10px rgba(255, 0, 0, 0.5);
+            box-shadow: 3px 3px 10px rgba(188, 44, 230, 0.5);
             transition: background-color 0.3s, transform 0.3s ease, box-shadow 0.3s;
         }
         button:hover {
-            background-color: #D00000;
-            transform: scale(1.1); /* Aumento de tamaño al pasar el cursor */
-            box-shadow: 5px 5px 15px rgba(255, 0, 0, 0.7); /* Sombra más grande para el hover */
-        }
-        .logo {
-            max-width: 150px;
-            display: block;
-            margin: 10px auto;
+            background: linear-gradient(to right, #6f12dc, #bc2ce6);
+            transform: scale(1.1);
+            box-shadow: 5px 5px 15px rgba(188, 44, 230, 0.7);
         }
 
-        /* Contenedor de PREX */
-        .prex-container {
-            background-color: rgba(112, 38, 221, 0.1); /* Fondo sutilmente morado */
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px; /* Separación con otras secciones */
-            border: 2px solid rgba(112, 38, 221, 0.3); /* Borde morado con opacidad */
-            box-shadow: 0 4px 10px rgba(112, 38, 221, 0.4); /* Sombra sutil para dar profundidad */
-        }
-
-        /* Contenedor de Dólar App */
-        .dolarapp-container {
-            background-color: rgba(34, 208, 129, 0.1); /* Fondo sutilmente verde */
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px; /* Separación con otras secciones */
-            border: 2px solid rgba(34, 208, 129, 0.3); /* Borde verde con opacidad */
-            box-shadow: 0 4px 10px rgba(34, 208, 129, 0.4); /* Sombra sutil para dar profundidad */
-        }
-
-        .alerta {
-            color: red;
-            font-size: 14px;
+        /* Estilo para el mensaje al final de la página */
+        .desarrollado {
             margin-top: 10px;
+            color: white;
+            font-size: 16px;
+        }
+        .desarrollado p {
+            text-align: center;
+            font-weight: normal;
+        }
+
+        /* Estilo para las barras separadoras */
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #fff;
+            margin: 10px 0; /* Menor margen para acercar las barras al botón */
         }
     </style>
 </head>
@@ -100,68 +120,73 @@
         </a>
         <h2>Calculadora de Retiros USD</h2>
         <label for="monto">Monto que deseas extraer (USD):</label>
-        <input type="number" id="monto" placeholder="Ingrese el monto (min 5 USD)">
+        <input type="number" id="monto" placeholder="Ingrese el monto (min 5 USD)" onchange="calcular()">
         <p class="alerta" id="mensajeEmergencia" style="display: none;">El monto mínimo es 5 USD</p>
-        
         <h3>Resultados</h3>
-        
-        <!-- Contenedor de PREX -->
-        <div class="prex-container">
-    <a href="https://play.google.com/store/apps/details?id=air.PrexArgentina&pcampaignid=web_share" target="_blank">
-        <img src="Images/prex1.png" alt="Logo Prex" class="logo">
-    </a>
-            <p>Monto neto a recibir: <span id="totalPrex">-</span> USD</p>
-            
-            <label for="cotizacionPrex">Valor del dólar en PREX:</label>
-            <input type="number" id="cotizacionPrex" placeholder="Ingrese cotización">
-            <p>Equivalente en Pesos: <span id="pesosPrex">-</span> ARS
-            </p>
+
+        <div class="prex-container-arg">
+            <a href="https://play.google.com/store/apps/details?id=air.PrexArgentina" target="_blank">
+                <img src="Images/PREXARG.png" alt="Logo Prex ARG" class="logo">
+            </a>
+            <p>Monto neto a recibir: <span id="totalPrexARG">-</span> USD</p>
+            <label for="cotizacionPrexARG">Valor del dólar en PREX ARG:</label>
+            <input type="number" id="cotizacionPrexARG" placeholder="Ingrese cotización">
+            <p>Equivalente en Pesos: <span id="pesosPrexARG">-</span> ARS</p>
         </div>
 
-        <!-- Contenedor de Dólar App -->
+        <div class="prex-container-uy">
+            <a href="https://play.google.com/store/apps/details?id=air.Prex" target="_blank">
+                <img src="Images/PREXUY.png" alt="Logo Prex UY" class="logo">
+            </a>
+            <p>Monto neto a recibir: <span id="totalPrexUY">-</span> USD</p>
+            <label for="cotizacionPrexUY">Valor del dólar en PREX UY:</label>
+            <input type="number" id="cotizacionPrexUY" placeholder="Ingrese cotización">
+            <p>Equivalente en Pesos: <span id="pesosPrexUY">-</span> ARS</p>
+        </div>
+
         <div class="dolarapp-container">
-    <a href="https://www.dolarapp.com/referrals/blk?referralCode=nicoluciel_C9x" target="_blank">
-        <img src="Images/dolarapp.png" alt="Logo Dólar App" class="logo">
-    </a>
+            <a href="https://www.dolarapp.com/referrals/blk?referralCode=nicoluciel_C9x" target="_blank">
+                <img src="Images/dolarapp.png" alt="Logo Dólar App" class="logo">
+            </a>
             <p>Monto neto a recibir: <span id="totalDolarApp">-</span> USD</p>
-            
             <p>Valor del dólar en Dólar App: <span id="valorDolarApp">-</span></p>
-            <p>Equivalente en Pesos (Dólar App): <span id="pesosDolarApp">-</span> ARS</p>
+            <p>Equivalente en Pesos: <span id="pesosDolarApp">-</span> ARS</p>
         </div>
-
-        <hr> <!-- Línea separadora solo antes del botón -->
         
+        <hr> <!-- Barra separadora encima del botón -->
+
         <button onclick="calcular()">Calcular</button>
-    <div class="footer">
-        Desarrollado por <strong>Brittleleaf</strong>
+
+        <!-- Barra separadora antes del mensaje -->
+        <hr>
+
+        <!-- Mensaje al final de la página -->
+        <div class="desarrollado">
+            <p>Desarrollado por <strong>Brittleleaf</strong></p>
+        </div>
+    </div>
 
     <script>
-        function formatCurrency(value) {
-            return value.toLocaleString('es-AR', { 
-                style: 'currency', 
-                currency: 'ARS',
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).replace('$', '').replace(',', '.');
-        }
-
         async function obtenerCotizacionDolarApp() {
             try {
                 const response = await fetch("https://criptoya.com/api/dolarapp/USDC/ARS/1");
                 const data = await response.json();
-                const totalBid = data.totalBid;
-                document.getElementById("valorDolarApp").innerText = totalBid;
-                return totalBid;
+                document.getElementById("valorDolarApp").innerText = formatCurrency(data.totalBid);
+                return data.totalBid;
             } catch (error) {
                 console.error("Error al obtener la cotización de Dólar App:", error);
             }
         }
 
+        function formatCurrency(amount) {
+            if (isNaN(amount)) return '-';
+            // Asegurar el formato "$0.000,00"
+            return '$ ' + amount.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        }
+
         async function calcular() {
             let monto = parseFloat(document.getElementById("monto").value);
             let mensajeEmergencia = document.getElementById("mensajeEmergencia");
-            
-            // Mostrar mensaje de emergencia si el monto es menor a 5
             if (isNaN(monto) || monto < 5) {
                 mensajeEmergencia.style.display = 'block';
                 return;
@@ -169,30 +194,34 @@
                 mensajeEmergencia.style.display = 'none';
             }
 
-            let totalPrex = monto - 4.88;
-            let totalDolarApp = monto - 3 - (monto * 0.035);
-            
-            document.getElementById("totalPrex").innerText = totalPrex.toFixed(2);
-            document.getElementById("totalDolarApp").innerText = totalDolarApp.toFixed(2);
-            
-            let cotizacionPrex = parseFloat(document.getElementById("cotizacionPrex").value);
-            
-            if (cotizacionPrex && cotizacionPrex > 0) {
-                document.getElementById("pesosPrex").innerText = formatCurrency(totalPrex * cotizacionPrex);
-            } else {
-                document.getElementById("pesosPrex").innerText = '-';
+            let totalPrexARG = monto;
+            document.getElementById("totalPrexARG").innerText = formatCurrency(totalPrexARG);
+
+            let cotizacionPrexARG = parseFloat(document.getElementById("cotizacionPrexARG").value); 
+            if (!isNaN(cotizacionPrexARG)) {
+                let pesosPrexARG = totalPrexARG * cotizacionPrexARG;
+                document.getElementById("pesosPrexARG").innerText = formatCurrency(pesosPrexARG);
             }
 
-            // Obtener cotización de Dólar App y mostrar el equivalente en pesos
-            const cotizacionDolarApp = await obtenerCotizacionDolarApp();
-            if (cotizacionDolarApp && cotizacionDolarApp > 0) {
-                document.getElementById("pesosDolarApp").innerText = formatCurrency(totalDolarApp * cotizacionDolarApp);
-            } else {
-                document.getElementById("pesosDolarApp").innerText = '-';
+            let totalPrexUY = monto - 4.88; // Comisión de 4.88 USD para Prex UY
+            document.getElementById("totalPrexUY").innerText = formatCurrency(totalPrexUY);
+
+            let cotizacionPrexUY = parseFloat(document.getElementById("cotizacionPrexUY").value);
+            if (!isNaN(cotizacionPrexUY)) {
+                let pesosPrexUY = totalPrexUY * cotizacionPrexUY;
+                document.getElementById("pesosPrexUY").innerText = formatCurrency(pesosPrexUY);
+            }
+
+            let cotizacionDolarApp = await obtenerCotizacionDolarApp();
+            if (!isNaN(cotizacionDolarApp)) {
+                let totalDolarApp = monto - 3 - (monto * 0.035);
+                document.getElementById("totalDolarApp").innerText = formatCurrency(totalDolarApp);
+
+                let pesosDolarApp = totalDolarApp * cotizacionDolarApp;
+                document.getElementById("pesosDolarApp").innerText = formatCurrency(pesosDolarApp);
             }
         }
 
-        // Obtener cotización de Dólar App al cargar la página
         obtenerCotizacionDolarApp();
     </script>
 </body>
