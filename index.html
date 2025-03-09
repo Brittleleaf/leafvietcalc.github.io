@@ -508,21 +508,23 @@
           }
           
           window.paypalCalcularCobro = function(){
-            let montoRecibir = parseFloat(document.getElementById("montoRecibir").value.replace(/\D/g, "")) / 100;
-            if(!isNaN(montoRecibir) && montoRecibir >= 0){
-              let comision = (montoRecibir * paypalComision) + paypalFija;
-              let montoEnviar = montoRecibir + comision;
-              document.getElementById("comisionCobrar").innerText = `USD $${comision.toFixed(2)}`;
-              document.getElementById("montoEnviar").innerText = `USD $${montoEnviar.toFixed(2)}`;
+            let net = parseFloat(document.getElementById("montoRecibir").value.replace(/\D/g, "")) / 100;
+            if(!isNaN(net) && net >= 0){
+              // Para cobrar, se requiere que: net = gross - (gross*0.054+0.30)
+              // Por lo tanto: gross = (net + 0.30) / (1 - 0.054)
+              let gross = (net + paypalFija) / (1 - paypalComision);
+              let commission = gross - net;
+              document.getElementById("comisionCobrar").innerText = `USD $${commission.toFixed(2)}`;
+              document.getElementById("montoEnviar").innerText = `USD $${gross.toFixed(2)}`;
             }
           }
           
           window.paypalCalcularPago = function(){
             let montoPagar = parseFloat(document.getElementById("montoPagar").value.replace(/\D/g, "")) / 100;
             if(!isNaN(montoPagar) && montoPagar >= 0){
-              let comision = (montoPagar * paypalComision) + paypalFija;
-              let montoRecibido = montoPagar - comision;
-              document.getElementById("comisionPagar").innerText = `USD $${comision.toFixed(2)}`;
+              let commission = (montoPagar * paypalComision) + paypalFija;
+              let montoRecibido = montoPagar - commission;
+              document.getElementById("comisionPagar").innerText = `USD $${commission.toFixed(2)}`;
               document.getElementById("montoRecibido").innerText = `USD $${montoRecibido.toFixed(2)}`;
             }
           }
