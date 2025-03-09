@@ -129,7 +129,7 @@
     }
     .paypal-comisiones p {
       font-size: 14px;
-      margin-top: 5px;
+      margin-bottom: 10px;
     }
     /* Animaciones de desvanecimiento y difuminado */
     @keyframes fadeOut {
@@ -156,14 +156,17 @@
         <img src="Images/leafviet.png" alt="Logo" class="logo" style="max-width: 250px;">
       </a>
 
-      <!-- Botón para mostrar la sección de Paypal Comisiones -->
+      <!-- Texto descriptivo de PayPal en la sección principal -->
       <div class="paypal-comisiones">
+        <p>¡Que las comisiones de PayPal no te sorprendan a la hora de pagar o solicitar un pago! Calculá el importe neto que recibirás o se cobrará en tu cuenta PayPal.</p>
         <button type="button" id="paypalBtn" onclick="showPaypalCalcSection()">Paypal Comisiones</button>
-        <p>Que las comisiones de paypal no te sorprendan a la hora de pagar o solicitar un pago, calcula el importe neto que recibirás o se cobrara en tu cuenta Paypal!</p>
       </div>
       <hr>
 
       <h2>Calculadora de Retiros USD</h2>
+      <!-- Subtexto agregado debajo del título -->
+      <p style="font-size:14px; margin-bottom:20px;">¿Ya tenés tu dinero en tu cuenta de PayPal? ¿Querés retirarlo? ¡Haz el cálculo aquí y elegí la cotización que más te convenga!</p>
+
       <label for="monto">Monto que deseas extraer (USD):</label>
       <input type="number" id="monto" placeholder="Ingrese el monto (min 5 USD)" onchange="calcular()">
       <p class="alerta" id="mensajeEmergencia" style="display: none;">El monto mínimo es 5 USD</p>
@@ -200,7 +203,6 @@
       
       <hr>
       <button onclick="calcular()">Calcular</button>
-      <hr>
     </div>
 
     <!-- SECCIÓN PAYPALCALCSECTION: Se muestra al presionar "Paypal Comisiones" -->
@@ -209,6 +211,10 @@
       <a href="https://www.instagram.com/brittleleaf/">
         <img src="Images/leafviet.png" alt="Logo" class="logo" style="max-width: 250px; margin-bottom:20px;">
       </a>
+      <!-- Nuevo título y subtexto en la sección de PayPal -->
+      <h2 style="font-size:20px; margin-bottom:5px;">Calculá las comisiones de Paypal</h2>
+      <p style="font-size:14px; margin-bottom:20px;">¿Querés saber las comisiones que te cobrará PayPal? ¡Realizá el cálculo aquí de forma sencilla, solo tenés que ingresar el monto!</p>
+      
       <!-- ##################################### -->
       <style>
         /* Aseguramos que el modelo de caja incluya padding y bordes */
@@ -234,6 +240,12 @@
           width: 100%;
           max-width: 380px;
           box-shadow: 0 4px 20px rgba(56, 60, 97, 0.7);
+        }
+        /* Subtexto para indicar el cambio de operación */
+        #paypalcalcsection .operation-info {
+          font-size: 12px;
+          margin-bottom: 10px;
+          color: #fff;
         }
         #paypalcalcsection .button-container {
           position: relative;
@@ -310,18 +322,26 @@
           z-index: 1;
         }
         #paypalcalcsection .form-container {
-          width: 100%;
-          padding: 10px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
+          /* Se asigna un padding superior e inferior para dejar un espacio prudente en los bordes */
+          padding-top: 20px;
+          padding-bottom: 20px;
         }
-        #paypalcalcsection .form-group {
-          margin: 10px 0;
-          width: 100%;
-          text-align: center;
+        /* ===== AJUSTES VISUALES EN LOS CONTENEDORES DE COBRAR Y PAGAR - Ajustados ===== */
+        #paypalcalcsection .form-container .form-group {
+          margin: 0;
         }
+        #paypalcalcsection .form-container .form-group:first-of-type {
+          margin-top: 15px;
+          margin-bottom: 3.5px;
+        }
+        #paypalcalcsection .form-container .form-group:not(:first-of-type):not(:last-of-type) {
+          margin: 3.5px 0;
+        }
+        #paypalcalcsection .form-container .form-group:last-of-type {
+          margin-top: 3.5px;
+          margin-bottom: 15px;
+        }
+        /* ============================================================ */
         #paypalcalcsection label {
           font-size: 16px;
           margin-bottom: 5px;
@@ -389,6 +409,8 @@
         }
       </style>
       <div class="switch-container">
+        <!-- Subtexto para indicar el cambio de operación -->
+        <p class="operation-info">Haz click en el botón para cambiar el tipo de operación.</p>
         <!-- Botón de cambio: inicialmente se muestra "Cobrar" -->
         <div id="buttonContainer" class="button-container">
           <div class="button-state cobrar active" id="stateCobrar">
@@ -444,7 +466,6 @@
       </div>
       <!-- Botón para regresar al cálculo de retiro (return a main content) -->
       <button type="button" class="return-btn" onclick="returnToMainContent()">Quiero calcular un retiro!</button>
-      <!-- Separador de anotación -->
       <!-- ##################################### -->
       <script>
         (function(){
