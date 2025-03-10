@@ -11,7 +11,7 @@ body {
   font-family: 'Montserrat', sans-serif;
   text-align: center; 
   margin: 20px; 
-  background: url('Images/background.jpg') no-repeat center center fixed;
+  background: url('../Images/background.jpg') no-repeat center center fixed;
   background-size: cover;
   background-color: #070612; 
   color: white;
