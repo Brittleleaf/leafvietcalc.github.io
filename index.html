@@ -46,26 +46,27 @@
       <p class="alerta" id="mensajeEmergencia" style="display: none;">El monto mínimo es 5 USD</p>
       <h3>Resultados</h3>
 
+      <!-- Prex ARG -->
       <div class="prex-container-arg">
         <a href="https://play.google.com/store/apps/details?id=air.PrexArgentina" target="_blank">
           <img src="Images/PREXARG.png" alt="Logo Prex ARG" class="logo-container">
         </a>
         <p>Monto neto a recibir: <span id="totalPrexARG">-</span> USD</p>
-        <label for="cotizacionPrexARG">Valor del dólar en PREX ARG:</label>
-        <input type="number" id="cotizacionPrexARG" placeholder="Ingrese cotización">
+        <p>Valor del dólar en PREX ARG: <span id="cotizacionPrexARG">-</span></p>
         <p>Equivalente en Pesos: <span id="pesosPrexARG">-</span> ARS</p>
       </div>
 
+      <!-- Prex UY -->
       <div class="prex-container-uy">
         <a href="https://play.google.com/store/apps/details?id=air.Prex" target="_blank">
           <img src="Images/PREXUY.png" alt="Logo Prex UY" class="logo-container">
         </a>
         <p>Monto neto a recibir: <span id="totalPrexUY">-</span> USD</p>
-        <label for="cotizacionPrexUY">Valor del dólar en PREX UY:</label>
-        <input type="number" id="cotizacionPrexUY" placeholder="Ingrese cotización">
+        <p>Valor del dólar en PREX UY: <span id="cotizacionPrexUY">-</span></p>
         <p>Equivalente en Pesos: <span id="pesosPrexUY">-</span> ARS</p>
       </div>
 
+      <!-- Dólar App -->
       <div class="dolarapp-container">
         <a href="https://www.dolarapp.com/referrals/blk?referralCode=nicoluciel_C9x" target="_blank">
           <img src="Images/dolarapp.png" alt="Logo Dólar App" class="logo-container">
@@ -255,92 +256,104 @@
     </div>
   </div>
 
-  <script>
-    async function obtenerCotizacionDolarApp() {
-      try {
-        const response = await fetch("https://criptoya.com/api/dolarapp/USDC/ARS/1");
-        const data = await response.json();
-        document.getElementById("valorDolarApp").innerText = formatCurrency(data.totalBid);
-        return data.totalBid;
-      } catch (error) {
-        console.error("Error al obtener la cotización de Dólar App:", error);
+    <!-- ========== Seccion cotizacion Prex START ========== -->
+    <script>
+      // Obtiene cotización Prex (USD → ARS)
+      let cotizprex = 0;
+      const PREX_URL = 'https://www.prexcard.com/hacelabien';
+      const PROXY = 'https://api.allorigins.win/raw?url=';
+
+      async function actualizarCotizacionPrex() {
+        try {
+          const res = await fetch(PROXY + encodeURIComponent(PREX_URL));
+          const html = await res.text();
+          const doc = new DOMParser().parseFromString(html, 'text/html');
+          const input = doc.querySelector('#cotizacionArg');
+          cotizprex = Number(input.value);
+          const txt = formatCurrency(cotizprex);
+          document.getElementById('cotizacionPrexARG').textContent = txt;
+          document.getElementById('cotizacionPrexUY').textContent = txt;
+        } catch (e) {
+          console.error('Error al obtener cotización Prex:', e);
+        }
       }
-    }
+      actualizarCotizacionPrex();
+      setInterval(actualizarCotizacionPrex, 600000);
 
-    function formatCurrency(amount) {
-      if (isNaN(amount)) return '-';
-      return '$ ' + amount.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
-
-    async function calcular() {
-      let monto = parseFloat(document.getElementById("monto").value);
-      let mensajeEmergencia = document.getElementById("mensajeEmergencia");
-      if (isNaN(monto) || monto < 5) {
-        mensajeEmergencia.style.display = 'block';
-        return;
-      } else {
-        mensajeEmergencia.style.display = 'none';
-      }
-
-      let totalPrexARG = monto;
-      document.getElementById("totalPrexARG").innerText = formatCurrency(totalPrexARG);
-
-      let cotizacionPrexARG = parseFloat(document.getElementById("cotizacionPrexARG").value); 
-      if (!isNaN(cotizacionPrexARG)) {
-        let pesosPrexARG = totalPrexARG * cotizacionPrexARG;
-        document.getElementById("pesosPrexARG").innerText = formatCurrency(pesosPrexARG);
+      function formatCurrency(amount) {
+        if (isNaN(amount)) return '-';
+        return '$ ' + amount.toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       }
 
-      let totalPrexUY = monto - 4.88;
-      document.getElementById("totalPrexUY").innerText = formatCurrency(totalPrexUY);
-
-      let cotizacionPrexUY = parseFloat(document.getElementById("cotizacionPrexUY").value);
-      if (!isNaN(cotizacionPrexUY)) {
-        let pesosPrexUY = totalPrexUY * cotizacionPrexUY;
-        document.getElementById("pesosPrexUY").innerText = formatCurrency(pesosPrexUY);
+      function parseCurrency(text) {
+        try {
+          return parseFloat(text.replace(/\s|\$/g, '').replace(/\./g, '').replace(/,/g, '.')) || 0;
+        } catch {
+          return 0;
+        }
       }
 
-      let cotizacionDolarApp = await obtenerCotizacionDolarApp();
-      if (!isNaN(cotizacionDolarApp)) {
-        let totalDolarApp = monto - 3 - (monto * 0.035);
-        document.getElementById("totalDolarApp").innerText = formatCurrency(totalDolarApp);
-
-        let pesosDolarApp = totalDolarApp * cotizacionDolarApp;
-        document.getElementById("pesosDolarApp").innerText = formatCurrency(pesosDolarApp);
+      async function obtenerCotizacionDolarApp() {
+        try {
+          const response = await fetch('https://criptoya.com/api/dolarapp/USDC/ARS/1');
+          const data = await response.json();
+          const txt = formatCurrency(data.totalBid);
+          document.getElementById('valorDolarApp').textContent = txt;
+          return data.totalBid;
+        } catch (error) {
+          console.error('Error al obtener la cotización de Dólar App:', error);
+          return 0;
+        }
       }
-    }
 
-    function showPaypalCalcSection() {
-      const mainContent = document.getElementById("mainContent");
-      const paypalcalcsection = document.getElementById("paypalcalcsection");
-      mainContent.classList.add("fade-out");
-      setTimeout(function() {
-        mainContent.style.display = "none";
-        mainContent.classList.remove("fade-out");
-        paypalcalcsection.style.display = "block";
-        paypalcalcsection.classList.add("fade-in");
-        setTimeout(function() {
-          paypalcalcsection.classList.remove("fade-in");
+      async function calcular() {
+        let monto = parseFloat(document.getElementById('monto').value);
+        const mensaje = document.getElementById('mensajeEmergencia');
+        if (isNaN(monto) || monto < 5) {
+          mensaje.style.display = 'block';
+          return;
+        } else {
+          mensaje.style.display = 'none';
+        }
+        // Prex ARG
+        document.getElementById('totalPrexARG').textContent = formatCurrency(monto);
+        const ratePrex = parseCurrency(document.getElementById('cotizacionPrexARG').textContent);
+        document.getElementById('pesosPrexARG').textContent = formatCurrency(monto * ratePrex);
+        // Prex UY
+        const netUY = monto - 4.88;
+        document.getElementById('totalPrexUY').textContent = formatCurrency(netUY);
+        document.getElementById('pesosPrexUY').textContent = formatCurrency(netUY * ratePrex);
+        // Dólar App
+        const rateApp = await obtenerCotizacionDolarApp();
+        const totalApp = monto - 3 - monto * 0.035;
+        document.getElementById('totalDolarApp').textContent = formatCurrency(totalApp);
+        document.getElementById('pesosDolarApp').textContent = formatCurrency(totalApp * rateApp);
+      }
+
+      function showPaypalCalcSection() {
+        const main = document.getElementById('mainContent');
+        const paypal = document.getElementById('paypalcalcsection');
+        main.classList.add('fade-out');
+        setTimeout(() => {
+          main.style.display = 'none';
+          paypal.style.display = 'block';
+          paypal.classList.add('fade-in');
         }, 500);
-      }, 500);
-    }
+      }
 
-    function returnToMainContent() {
-      const mainContent = document.getElementById("mainContent");
-      const paypalcalcsection = document.getElementById("paypalcalcsection");
-      paypalcalcsection.classList.add("fade-out");
-      setTimeout(function() {
-        paypalcalcsection.style.display = "none";
-        paypalcalcsection.classList.remove("fade-out");
-        mainContent.style.display = "block";
-        mainContent.classList.add("fade-in");
-        setTimeout(function() {
-          mainContent.classList.remove("fade-in");
+      function returnToMainContent() {
+        const main = document.getElementById('mainContent');
+        const paypal = document.getElementById('paypalcalcsection');
+        paypal.classList.add('fade-out');
+        setTimeout(() => {
+          paypal.style.display = 'none';
+          main.style.display = 'block';
+          main.classList.add('fade-in');
         }, 500);
-      }, 500);
-    }
+      }
 
-    obtenerCotizacionDolarApp();
-  </script>
+      // Inicializaciones
+      obtenerCotizacionDolarApp();
+    </script>
 </body>
 </html>
